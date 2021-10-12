@@ -3,6 +3,8 @@
 <suite name="All Test Suite">
     <test name="Wikipedia">
         <parameter name="search" value="Астрономия"/>
+        <parameter name="login" value="TestForWD"/>
+        <parameter name="passWord" value="3VGrdB4wHw$tA5F"/>
         <classes>
             <class name="TestWikipedia"/>
         </classes>
