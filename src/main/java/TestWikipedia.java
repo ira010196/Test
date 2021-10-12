@@ -3,6 +3,8 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
@@ -68,10 +70,39 @@ public class TestWikipedia {
         Assert.assertTrue(valueNeededElement == 7);
     }
 
-    @AfterSuite
-    public void closeWebDriver(){
-        chromeDriver.quit();
+    @Parameters({"header"})
+    @Test(dependsOnMethods = {"testLoginForm"})
+    public void testCreateTopic(String header){
+        WebElement backOnMainPage = chromeDriver.findElement(By.xpath("//a[@title='Перейти на заглавную страницу']"));
+        backOnMainPage.click();
+        WebElement newTopic = (new WebDriverWait(chromeDriver, Duration.ofSeconds(10)).until(ExpectedConditions.presenceOfElementLocated(By.linkText("Создать статью"))));
+        newTopic.click();
+        WebElement startWork = chromeDriver.findElement(By.linkText(">> Начать работу мастера"));
+        startWork.click();
+        WebElement writeAboutSmthg = (new WebDriverWait(chromeDriver, Duration.ofSeconds(10)).until(ExpectedConditions.presenceOfElementLocated(By.linkText(">> Я пишу о чём-либо ещё"))));
+        writeAboutSmthg.click();
+        WebElement significanceTopic = (new WebDriverWait(chromeDriver, Duration.ofSeconds(10)).until(ExpectedConditions.presenceOfElementLocated(By.linkText(">> Моя статья — не реклама и описывает значимый объект"))));
+        significanceTopic.click();
+        WebElement topicWithLinks = (new WebDriverWait(chromeDriver, Duration.ofSeconds(10)).until(ExpectedConditions.presenceOfElementLocated(By.linkText(">> Моя статья подкреплена хорошими источниками"))));
+        topicWithLinks.click();
+        WebElement topicNotCopied = (new WebDriverWait(chromeDriver, Duration.ofSeconds(10)).until(ExpectedConditions.presenceOfElementLocated(By.linkText(">> Моя статья нейтральна, показывает значимость и ниоткуда не скопирована"))));
+        topicNotCopied.click();
+        WebElement chooseIncubator = chromeDriver.findElement(By.xpath("//input[@name='title' and @value]"));
+        chooseIncubator.sendKeys(header , Keys.ENTER);
+        Assert.assertEquals(chromeDriver.getTitle(), "Создание страницы «Инкубатор:Автоматизированное тестирование ПО» — Википедия");
     }
+
+    @Parameters ({"header", "text"})
+    @Test
+    public void inputText(String header, String text){
+
+
+    }
+
+//    @AfterSuite
+//    public void closeWebDriver(){
+//        chromeDriver.quit();
+//    }
 
 
 }
