@@ -1,7 +1,4 @@
-import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -26,7 +23,7 @@ public class TestWikipedia {
         chromeDriver.manage().window().maximize();
     }
 
-    @Test(alwaysRun = true)
+    @Test(alwaysRun = true, retryAnalyzer = Retry.class)
     public void testChooseRussianLanguage() {
         WebElement ruLang = chromeDriver.findElement(By.xpath("//a[@id='js-link-box-ru']"));
         ruLang.click();
@@ -36,7 +33,7 @@ public class TestWikipedia {
     }
 
     @Parameters({"search"})
-    @Test(description = "check the search, if a result is empty, the test is not passed")
+    @Test(description = "check the search, if a result is empty, the test is not passed", retryAnalyzer = Retry.class)
     public void testSearch(String search) {
         WebElement searchForm = chromeDriver.findElement(By.id("searchInput"));
         searchForm.sendKeys(search, Keys.ENTER);
@@ -46,7 +43,7 @@ public class TestWikipedia {
     }
 
     @Parameters({"login", "passWord"})
-    @Test(dependsOnMethods = {"testChooseRussianLanguage"})
+    @Test(dependsOnMethods = {"testChooseRussianLanguage"}, retryAnalyzer = Retry.class)
     public void testLoginForm(String login, String passWord) {
         WebElement buttonComeIn = chromeDriver.findElement(By.linkText("Войти"));
         buttonComeIn.click();
@@ -67,17 +64,17 @@ public class TestWikipedia {
                 valueNeededElement++;
             }
         }
-        Assert.assertTrue(valueNeededElement == 7);
+        Assert.assertEquals(valueNeededElement, 7);
     }
 
     @Parameters({"header"})
-    @Test(dependsOnMethods = {"testLoginForm"})
-    public void testCreateTopic(String header){
+    @Test(dependsOnMethods = {"testLoginForm"}, retryAnalyzer = Retry.class)
+    public void tryCreateTopic(String header) {
         WebElement backOnMainPage = chromeDriver.findElement(By.xpath("//a[@title='Перейти на заглавную страницу']"));
         backOnMainPage.click();
         WebElement newTopic = (new WebDriverWait(chromeDriver, Duration.ofSeconds(10)).until(ExpectedConditions.presenceOfElementLocated(By.linkText("Создать статью"))));
         newTopic.click();
-        WebElement startWork = chromeDriver.findElement(By.linkText(">> Начать работу мастера"));
+        WebElement startWork = (new WebDriverWait(chromeDriver, Duration.ofSeconds(10)).until(ExpectedConditions.presenceOfElementLocated(By.linkText(">> Начать работу мастера"))));
         startWork.click();
         WebElement writeAboutSmthg = (new WebDriverWait(chromeDriver, Duration.ofSeconds(10)).until(ExpectedConditions.presenceOfElementLocated(By.linkText(">> Я пишу о чём-либо ещё"))));
         writeAboutSmthg.click();
@@ -88,21 +85,29 @@ public class TestWikipedia {
         WebElement topicNotCopied = (new WebDriverWait(chromeDriver, Duration.ofSeconds(10)).until(ExpectedConditions.presenceOfElementLocated(By.linkText(">> Моя статья нейтральна, показывает значимость и ниоткуда не скопирована"))));
         topicNotCopied.click();
         WebElement chooseIncubator = chromeDriver.findElement(By.xpath("//input[@name='title' and @value]"));
-        chooseIncubator.sendKeys(header , Keys.ENTER);
+        chooseIncubator.sendKeys(header, Keys.ENTER);
         Assert.assertEquals(chromeDriver.getTitle(), "Создание страницы «Инкубатор:Автоматизированное тестирование ПО» — Википедия");
     }
 
-    @Parameters ({"header", "text"})
-    @Test
-    public void inputText(String header, String text){
-
-
+    @Parameters({"text"})
+    @Test(dependsOnMethods = {"tryCreateTopic"}, retryAnalyzer = Retry.class)
+    public void inputText(String text) {
+        WebElement textForm = chromeDriver.findElement(By.id("wpTextbox1"));
+        textForm.clear();
+        textForm.sendKeys(text, Keys.DELETE);
+        WebElement view = chromeDriver.findElement(By.id("wpPreview"));
+        view.click();
+        WebElement buttonCreatePage = chromeDriver.findElement(By.id("wpSave"));
+        buttonCreatePage.click();
+        WebElement checkText = chromeDriver.findElement(By.id("wpTextbox1"));
+        String getText = checkText.getAttribute("value").trim();
+        Assert.assertEquals(getText, text);
     }
 
-//    @AfterSuite
-//    public void closeWebDriver(){
-//        chromeDriver.quit();
-//    }
+    @AfterSuite
+    public void closeWebDriver() {
+        chromeDriver.quit();
+    }
 
 
 }
