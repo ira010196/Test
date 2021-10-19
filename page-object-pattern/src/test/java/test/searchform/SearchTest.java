@@ -8,7 +8,7 @@ import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 import test.ConfProperties;
 
-import java.time.Duration;
+import java.util.concurrent.TimeUnit;
 
 public class SearchTest {
 
@@ -20,14 +20,14 @@ public class SearchTest {
         System.setProperty("webdriver.chrome.driver", ConfProperties.getProperty("chromedriver"));
         driver = new ChromeDriver();
         driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         driver.get(ConfProperties.getProperty("mainpage"));
         mainPage = new MainPage(driver);
 
     }
 
     @Parameters({"search"})
-    @Test(description = "check the search, if a result is empty, the test is not passed")
+    @Test(description = "check the search, if a result is empty, the org.example.test is not passed")
     public void searchTest(String search) {
         mainPage.inputAndFindWord(search);
         Assert.assertTrue(mainPage.getResultOfSearch() > 0);

@@ -6,7 +6,7 @@ import org.testng.Assert;
 import org.testng.annotations.*;
 import test.ConfProperties;
 
-import java.time.Duration;
+import java.util.concurrent.TimeUnit;
 
 public class LanguageTest {
     public static WebDriver driver;
@@ -25,7 +25,7 @@ public class LanguageTest {
         driver = new ChromeDriver();
         languagePage = new LanguagePage(driver);
         driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         driver.get(ConfProperties.getProperty("languagepage"));
         languagePage.clickBtnReadWiki();
     }
@@ -34,7 +34,7 @@ public class LanguageTest {
     @AfterMethod
     public void backOnLanguagePage(){
         driver.navigate().back();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
     }
 
     @Test

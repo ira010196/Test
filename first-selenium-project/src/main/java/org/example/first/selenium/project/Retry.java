@@ -1,3 +1,5 @@
+package org.example.first.selenium.project;
+
 import org.testng.ITestResult;
 import org.testng.util.RetryAnalyzerCount;
 
