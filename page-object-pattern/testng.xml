@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="All Test Suite">
+    <test verbose="2" preserve-order="true" name="D:/PageObject">
+        <parameter name="login" value="TestForWD"/>
+        <parameter name="password" value="3VGrdB4wHw$tA5F"/>
+        <parameter name="search" value="Астрономия"/>
+        <classes>
+            <!-- <class name="test.loginform.LoginTest"></class> -->
+            <!-- <class name="test.searchform.SearchTest"></class> -->
+            <class name="test.language.LanguageTest"></class>
+        </classes>
+    </test>
+</suite>
