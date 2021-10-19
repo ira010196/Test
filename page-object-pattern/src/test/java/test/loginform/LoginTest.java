@@ -9,7 +9,7 @@ import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 import test.ConfProperties;
 
-import java.time.Duration;
+import java.util.concurrent.TimeUnit;
 
 public class LoginTest {
     public static LoginPage loginPage;
@@ -22,7 +22,7 @@ public class LoginTest {
         System.setProperty("webdriver.chrome.driver", ConfProperties.getProperty("chromedriver"));
         driver = new ChromeDriver();
         driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         driver.get(ConfProperties.getProperty("loginpage"));
         loginPage = new LoginPage(driver);
         profilePage = new ProfilePage(driver);
