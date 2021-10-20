@@ -3,6 +3,7 @@ package test.searchform;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
@@ -12,8 +13,8 @@ import java.util.concurrent.TimeUnit;
 
 public class SearchTest {
 
-    public static WebDriver driver;
-    public static MainPage mainPage;
+    private static WebDriver driver;
+    private static MainPage mainPage;
 
     @BeforeClass
     public static void setUp() {
@@ -31,6 +32,11 @@ public class SearchTest {
     public void searchTest(String search) {
         mainPage.inputAndFindWord(search);
         Assert.assertTrue(mainPage.getResultOfSearch() > 0);
+    }
+
+    @AfterClass
+    public void close(){
+        driver.quit();
     }
 
 }

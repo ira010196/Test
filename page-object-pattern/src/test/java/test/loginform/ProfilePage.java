@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class ProfilePage {
-    public WebDriver driver;
+    WebDriver driver;
 
     public ProfilePage(WebDriver driver) {
         PageFactory.initElements(driver, this);
@@ -26,7 +26,10 @@ public class ProfilePage {
     private WebElement logoutButton;
 
     @FindBy(xpath = "//ul[@class='vector-menu-content-list']/li")
-    List<WebElement> userMenu;
+    private List<WebElement> userMenu;
+
+    @FindBy(linkText = "Создать статью")
+    private WebElement createNewArticleBtn;
 
     public String getUserName(){
         WebDriverWait wait = new WebDriverWait(driver, 10);
@@ -42,6 +45,12 @@ public class ProfilePage {
     public void clickButtonLogout(){
         logoutButton.click();
     }
+
+    public void clickCreateNewArticle(){
+        createNewArticleBtn.click();
+    }
+
+
 
 
 

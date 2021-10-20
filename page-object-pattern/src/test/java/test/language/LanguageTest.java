@@ -9,8 +9,8 @@ import test.ConfProperties;
 import java.util.concurrent.TimeUnit;
 
 public class LanguageTest {
-    public static WebDriver driver;
-    public static LanguagePage languagePage;
+    private static WebDriver driver;
+    private static LanguagePage languagePage;
     private static final String en = "en";
     private static final String de = "de";
     private static final String fr = "fr";

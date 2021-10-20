@@ -7,7 +7,7 @@ import org.openqa.selenium.support.PageFactory;
 
 
 public class LanguagePage {
-    public WebDriver driver;
+    WebDriver driver;
 
     public LanguagePage(WebDriver driver) {
         PageFactory.initElements(driver, this);

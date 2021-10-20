@@ -12,6 +12,7 @@
     <modules>
         <module>first-selenium-project</module>
         <module>page-object-pattern</module>
+        <module>second-page-object</module>
     </modules>
     <properties>
         <maven.compiler.source>8</maven.compiler.source>

@@ -5,10 +5,16 @@
         <parameter name="login" value="TestForWD"/>
         <parameter name="password" value="3VGrdB4wHw$tA5F"/>
         <parameter name="search" value="Астрономия"/>
+        <parameter name="header" value="Автоматизированное тестирование ПО"/>
+        <!--<groups>
+            <run>
+                <include name="loginTests"/>
+            </run>
+        </groups>-->
         <classes>
-            <!-- <class name="test.loginform.LoginTest"></class> -->
-            <!-- <class name="test.searchform.SearchTest"></class> -->
-            <class name="test.language.LanguageTest"></class>
+            <class name="test.loginform.LoginTest"/>
+            <class name="test.searchform.SearchTest"/>
+            <class name="test.language.LanguageTest"/>
         </classes>
     </test>
 </suite>
