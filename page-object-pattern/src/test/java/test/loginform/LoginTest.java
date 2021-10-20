@@ -3,22 +3,21 @@ package test.loginform;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.Parameters;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 import test.ConfProperties;
 
 import java.util.concurrent.TimeUnit;
 
 public class LoginTest {
-    public static LoginPage loginPage;
-    public static ProfilePage profilePage;
-    public static WebDriver driver;
+    private static LoginPage loginPage;
+    private static ProfilePage profilePage;
+    private static WebDriver driver;
+    private static CreateArticlePage createArticlePage;
+    DataForLoginTest dataForLoginTest = new DataForLoginTest();
 
 
-    @BeforeClass
-    public static void setUp() {
+    @BeforeClass(alwaysRun = true)
+    public static void  setUp() {
         System.setProperty("webdriver.chrome.driver", ConfProperties.getProperty("chromedriver"));
         driver = new ChromeDriver();
         driver.manage().window().maximize();
@@ -26,12 +25,12 @@ public class LoginTest {
         driver.get(ConfProperties.getProperty("loginpage"));
         loginPage = new LoginPage(driver);
         profilePage = new ProfilePage(driver);
-
+        createArticlePage = new CreateArticlePage(driver);
     }
 
 
     @Parameters({"login", "password"})
-    @Test
+    @Test(groups = {"loginTests"})
     public void loginTest(String login, String password) {
         loginPage.inputLogin(login);
         loginPage.inputPassword(password);
@@ -41,7 +40,7 @@ public class LoginTest {
 
 
     @Parameters({"login"})
-    @Test
+    @Test(groups = {"loginTests"})
     public void menuTest(String login){
         int checkProfileMenu = 0;
         for (String string: profilePage.getUserMenu()) {
@@ -52,16 +51,33 @@ public class LoginTest {
             }
         }
         Assert.assertEquals(checkProfileMenu, 7);
-
     }
 
-    @AfterClass
+    @Parameters({"header"})
+    @Test(dependsOnGroups = {"loginTests"})
+    public void createNewHeaderForArticleTest(String header){
+        profilePage.clickCreateNewArticle();
+        createArticlePage.clickStartWork();
+        createArticlePage.clickWriteAbout();
+        createArticlePage.clickSignificanceTopic();
+        createArticlePage.clickArticleWithLinks();
+        createArticlePage.clickTopicNotCopied();
+        createArticlePage.inputHeader(header);
+        Assert.assertEquals(driver.getTitle(), dataForLoginTest.getExpectedHeader());
+    }
+
+    @Test(dependsOnMethods = {"createNewHeaderForArticleTest"})
+    public void inputTextInDraftTest(){
+        createArticlePage.clearText();
+        createArticlePage.inputNewText(dataForLoginTest.getTextForArticle());
+        createArticlePage.clickBtnCreateArticle();
+        Assert.assertEquals(createArticlePage.existText(), dataForLoginTest.getTextForArticle());
+    }
+
+    @AfterClass(alwaysRun = true)
     public void logoutProfilePage(){
         profilePage.clickButtonLogout();
         driver.quit();
     }
-
-
-
 
 }
