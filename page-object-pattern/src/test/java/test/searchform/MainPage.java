@@ -9,7 +9,7 @@ import org.openqa.selenium.support.PageFactory;
 import java.util.List;
 
 public class MainPage {
-    public WebDriver driver;
+    WebDriver driver;
 
     public MainPage(WebDriver driver) {
         PageFactory.initElements(driver, this);
