@@ -74,19 +74,26 @@ public class TestWikipedia {
     public void tryCreateTopic(String header) {
         WebElement backOnMainPage = chromeDriver.findElement(By.xpath("//a[@title='Перейти на заглавную страницу']"));
         backOnMainPage.click();
-        WebElement newTopic = (new WebDriverWait(chromeDriver, 10).until(ExpectedConditions.presenceOfElementLocated(By.linkText("Создать статью"))));
+        WebElement newTopic = (new WebDriverWait(chromeDriver, 10).
+                until(ExpectedConditions.presenceOfElementLocated(By.linkText("Создать статью"))));
         newTopic.click();
-        WebElement startWork = (new WebDriverWait(chromeDriver, 10).until(ExpectedConditions.presenceOfElementLocated(By.linkText(">> Начать работу мастера"))));
+        WebElement startWork = (new WebDriverWait(chromeDriver, 10).
+                until(ExpectedConditions.presenceOfElementLocated(By.linkText(">> Начать работу мастера"))));
         startWork.click();
-        WebElement writeAboutSmthg = (new WebDriverWait(chromeDriver, 10).until(ExpectedConditions.presenceOfElementLocated(By.linkText(">> Я пишу о чём-либо ещё"))));
+        WebElement writeAboutSmthg = (new WebDriverWait(chromeDriver, 10).
+                until(ExpectedConditions.presenceOfElementLocated(By.linkText(">> Я пишу о чём-либо ещё"))));
         writeAboutSmthg.click();
-        WebElement significanceTopic = (new WebDriverWait(chromeDriver, 10).until(ExpectedConditions.presenceOfElementLocated(By.linkText(">> Моя статья — не реклама и описывает значимый объект"))));
+        WebElement significanceTopic = (new WebDriverWait(chromeDriver, 10).
+                until(ExpectedConditions.presenceOfElementLocated(By.linkText(">> Моя статья — не реклама и описывает значимый объект"))));
         significanceTopic.click();
-        WebElement topicWithLinks = (new WebDriverWait(chromeDriver, 10).until(ExpectedConditions.presenceOfElementLocated(By.linkText(">> Моя статья подкреплена хорошими источниками"))));
+        WebElement topicWithLinks = (new WebDriverWait(chromeDriver, 10).
+                until(ExpectedConditions.presenceOfElementLocated(By.linkText(">> Моя статья подкреплена хорошими источниками"))));
         topicWithLinks.click();
-        WebElement topicNotCopied = (new WebDriverWait(chromeDriver, 10).until(ExpectedConditions.presenceOfElementLocated(By.linkText(">> Моя статья нейтральна, показывает значимость и ниоткуда не скопирована"))));
+        WebElement topicNotCopied = (new WebDriverWait(chromeDriver, 10).
+                until(ExpectedConditions.presenceOfElementLocated(By.linkText(">> Моя статья нейтральна, показывает значимость и ниоткуда не скопирована"))));
         topicNotCopied.click();
-        WebElement chooseIncubator = chromeDriver.findElement(By.xpath("//input[@name='title' and @value]"));
+        WebElement chooseIncubator = chromeDriver.findElement(By.
+                xpath("//input[@name='title' and @value]"));
         chooseIncubator.sendKeys(header, Keys.ENTER);
         Assert.assertEquals(chromeDriver.getTitle(), "Создание страницы «Инкубатор:Автоматизированное тестирование ПО» — Википедия");
     }
@@ -105,6 +112,7 @@ public class TestWikipedia {
         String getText = checkText.getAttribute("value").trim();
         Assert.assertEquals(getText, text);
     }
+
 
     @AfterSuite
     public void closeWebDriver() {
