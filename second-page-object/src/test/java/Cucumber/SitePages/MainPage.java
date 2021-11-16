@@ -28,6 +28,9 @@ public class MainPage {
     @FindBy(id = "menu_time_viewTimeModule")
     private WebElement time;
 
+    @FindBy(id = "menu_pim_viewPimModule")
+    private WebElement PIM;
+
     public void click_welcome_link(){
         welcome.click();
     }
@@ -48,5 +51,9 @@ public class MainPage {
 
     public void click_time_button() {
         time.click();
+    }
+
+    public void click_PIM_link(){
+        PIM.click();
     }
 }

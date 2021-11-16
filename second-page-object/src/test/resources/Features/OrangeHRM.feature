@@ -22,10 +22,9 @@ Feature: check the functionality of the main page
     And user selects Bug Fixes in the Activity Name column
     And clicks on save button
     Then displayed my changed Timesheet with parameter <Project Name> the same in example table
+
     Examples:
       | Project Name                                   | Mon | Tue | Wed | Thu | Fri | Sat | Sun |
       | Global Corp and Co - Global Software phase - 1 | 4   | 5   | 6   | 7   | 8   | 9   | 10  |
       | Global Corp and Co - Global Software phase - 2 | 6   | 6   | 6   | 8   | 12  | 10  | 1   |
       | FreeWave Technologies, Inc. - FWT - Phase 1    | 3   | 8   | 9   | 9   | 10  | 12  | 13  |
-
-

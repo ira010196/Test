@@ -8,7 +8,8 @@ public class ExpectedResults {
     private static final String URL_MAIN_PAGE = "https://opensource-demo.orangehrmlive.com/index.php/dashboard";
     private static final List<String> menu = Arrays.asList("About", "Support", "Logout");
     private static final List<String> TIME_MENU = Arrays.asList("Timesheets", "Attendance", "Reports", "Project Info");
-
+    private static final List<String> PERSONAL_DETAILS_NAVIGATION = Arrays.
+            asList("Personal Details", "Contact Details", "Emergency Contacts", "Dependents", "Immigration", "Job", "Salary", "Tax Exemptions", "Report-to", "Qualifications", "Memberships");
 
     public String getUrlLoginPage(){
         return URL_LOGIN_PAGE;
@@ -24,5 +25,9 @@ public class ExpectedResults {
 
     public List<String> getTimemenu(){
         return TIME_MENU;
+    }
+
+    public List<String> getPersonalDetailsNavigation(){
+        return PERSONAL_DETAILS_NAVIGATION;
     }
 }

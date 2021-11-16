@@ -1,4 +1,4 @@
-package Cucumber.StepsDefinitions;
+package Cucumber.StepsDefinitionsForOrange;
 
 import Cucumber.ConfigurationProperties;
 import Cucumber.ExpectedResults;
@@ -10,22 +10,19 @@ import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.cucumber.java.en.*;
 import org.junit.Assert;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.concurrent.TimeUnit;
 
 public class StepsForOrangeHRM {
 
-    WebDriver driver;
-    LoginPage loginPage;
-    MainPage mainPage;
+    private WebDriver driver;
+    private LoginPage loginPage;
+    private MainPage mainPage;
     ExpectedResults expectedResults = new ExpectedResults();
-    TimePage timePage;
-    MyTimesheet myTimesheet;
+    private TimePage timePage;
+    private MyTimesheet myTimesheet;
 
     @Before
     public void setUp(){
