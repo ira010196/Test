@@ -1,11 +1,11 @@
-package Cucumber.StepsForPIM;
+package org.example.steps.pim;
 
 
-import Cucumber.ConfigurationProperties;
-import Cucumber.ExpectedResults;
-import Cucumber.SitePages.*;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
+import org.example.ConfigurationProperties;
+import org.example.ExpectedResults;
+import org.example.site.pages.*;
 import io.cucumber.java.en.*;
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;

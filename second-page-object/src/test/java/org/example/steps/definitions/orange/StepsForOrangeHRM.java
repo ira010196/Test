@@ -1,11 +1,11 @@
-package Cucumber.StepsDefinitionsForOrange;
+package org.example.steps.definitions.orange;
 
-import Cucumber.ConfigurationProperties;
-import Cucumber.ExpectedResults;
-import Cucumber.SitePages.LoginPage;
-import Cucumber.SitePages.MainPage;
-import Cucumber.SitePages.MyTimesheet;
-import Cucumber.SitePages.TimePage;
+import org.example.ConfigurationProperties;
+import org.example.ExpectedResults;
+import org.example.site.pages.LoginPage;
+import org.example.site.pages.MainPage;
+import org.example.site.pages.MyTimesheet;
+import org.example.site.pages.TimePage;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.cucumber.java.en.*;
@@ -83,7 +83,6 @@ public class StepsForOrangeHRM {
 
     @And("user on navigated on Time Page")
     public void user_on_navigated_on_time_page() {
-        timePage.print_time_menu();
         Assert.assertEquals(expectedResults.getTimemenu(), timePage.get_time_menu());
     }
 
@@ -119,11 +118,11 @@ public class StepsForOrangeHRM {
         myTimesheet.insert_sun(sun);
     }
 
-    @And("user selects Bug Fixes in the Activity Name column")
-    public void userSelectsBugFixesInTheActivityNameColumn() {
+    @And("^user selects (.*)$")
+    public void userSelectsActivityName(String aName) {
         myTimesheet.click_activityName();
-        myTimesheet.print_activity_list();
-        myTimesheet.choose_bugFixes_activity();
+        myTimesheet.getActivityList()
+                .get(myTimesheet.get_index_activity_name(aName)).click();
     }
 
     @And("clicks on save button")
