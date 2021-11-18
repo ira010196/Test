@@ -104,7 +104,7 @@ public class StepsPIM {
     @And("user located on personal details page")
     public void user_located_on_personal_details_page() {
         System.out.println(personalDetailsPage.get_navigation());
-        Assert.assertEquals(personalDetailsPage.get_navigation(), expectedResults.getPersonalDetailsNavigation());
+        Assert.assertEquals(expectedResults.getPersonalDetailsNavigation(), personalDetailsPage.get_navigation());
     }
 
     @And("clicks the edit button")
