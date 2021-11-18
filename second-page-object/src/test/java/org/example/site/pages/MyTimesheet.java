@@ -1,4 +1,4 @@
-package Cucumber.SitePages;
+package org.example.site.pages;
 
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
@@ -113,22 +113,16 @@ public class MyTimesheet {
         saveButton.click();
     }
 
-    public List<String> get_activity_list(){
+    public List<String> getStringActivityList(){
         return activityList.stream().map(WebElement::getText).collect(Collectors.toList());
     }
 
-    public void print_activity_list(){
-        for (WebElement element: activityList) {
-            System.out.println(element.getText());
-        }
+    public int get_index_activity_name(String aName){
+        return getStringActivityList().indexOf(aName);
     }
 
-    public int get_index_bug_fixes(){
-        return get_activity_list().indexOf("Bug Fixes");
-    }
-
-    public void choose_bugFixes_activity(){
-        activityList.get(get_index_bug_fixes()).click();
+    public List<WebElement> getActivityList(){
+        return activityList;
     }
 
     public String get_text(){

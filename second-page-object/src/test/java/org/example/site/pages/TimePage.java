@@ -1,9 +1,12 @@
-package Cucumber.SitePages;
+package org.example.site.pages;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -27,11 +30,11 @@ public class TimePage {
     private List<WebElement> timeMenu;
 
 
-    public void click_timesSheets_link(){
+    public void click_timesSheets_link() {
         timesSheets.click();
     }
 
-    public void click_myTimeSheet_link(){
+    public void click_myTimeSheet_link() {
         myTimeSheet.click();
     }
 
@@ -39,16 +42,9 @@ public class TimePage {
         return myTimeSheet.isDisplayed();
     }
 
-    public List<String> get_time_menu(){
+    public List<String> get_time_menu() {
+        WebDriverWait wDWait = new WebDriverWait(driver, 10);
+        wDWait.until(ExpectedConditions.numberOfElementsToBe(By.xpath("//li[@class='current main-menu-first-level-list-item']/ul/li"), 4));
         return timeMenu.stream().map(WebElement::getText).collect(Collectors.toList());
     }
-
-    public void print_time_menu(){
-        for (WebElement element: timeMenu) {
-            System.out.println(element.getText());
-        }
-    }
-
-
-
 }

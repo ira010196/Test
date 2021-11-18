@@ -1,4 +1,4 @@
-package Cucumber.SitePages;
+package org.example.site.pages;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;

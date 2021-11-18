@@ -1,11 +1,11 @@
-package Cucumber.StepsForPIM;
+package org.example.steps.pim;
 
 
-import Cucumber.ConfigurationProperties;
-import Cucumber.ExpectedResults;
-import Cucumber.SitePages.*;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
+import org.example.ConfigurationProperties;
+import org.example.ExpectedResults;
+import org.example.site.pages.*;
 import io.cucumber.java.en.*;
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
@@ -104,7 +104,7 @@ public class StepsPIM {
     @And("user located on personal details page")
     public void user_located_on_personal_details_page() {
         System.out.println(personalDetailsPage.get_navigation());
-        Assert.assertEquals(personalDetailsPage.get_navigation(), expectedResults.getPersonalDetailsNavigation());
+        Assert.assertEquals(expectedResults.getPersonalDetailsNavigation(), personalDetailsPage.get_navigation());
     }
 
     @And("clicks the edit button")
